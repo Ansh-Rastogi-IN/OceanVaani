@@ -1,0 +1,19 @@
+import sqlite3
+
+def print_columns(db_path, table_name):
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    cursor.execute(f'PRAGMA table_info({table_name});')
+    columns = cursor.fetchall()
+
+    print(f"Columns in {table_name}:")
+    for col in columns:
+        print(f"- {col[1]} ({col[2]})")
+
+    conn.close()
+
+if __name__ == "__main__":
+    db_path = r"D:\Project\sih\INCOIS_ARGO_APPL\dbase\argo_data.db"
+    table_name = "Argo_details_2010"
+    print_columns(db_path, table_name)
